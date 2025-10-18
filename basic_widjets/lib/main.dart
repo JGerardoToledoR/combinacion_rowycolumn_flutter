@@ -7,7 +7,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,47 +29,77 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        child: Container(
-          padding: EdgeInsets.all(12),
-          color: Colors.green.shade100,
-          height: 200,
-          width: 250,
-          child: Column(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // ---------------- Ejemplo anterior ----------------
+            Container(
+              padding: const EdgeInsets.all(12),
+              color: Colors.green.shade100,
+              height: 200,
+              width: 250,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Container(color: const Color.fromARGB(255, 19, 34, 163)),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(color: const Color.fromARGB(255, 189, 8, 8)),
+                  ),
+                ],
+              ),
+            ),
 
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(flex: 1, child: Container(color: const Color.fromARGB(255, 19, 34, 163),)),
-              Expanded(flex: 2, child: Container(color: const Color.fromARGB(255, 189, 8, 8),))
-              ],
-          ),
+            const SizedBox(height: 30),
+
+            // ---------------- Nuevo bloque (Ejemplo 7) ----------------
+            Container(
+              padding: const EdgeInsets.all(16),
+              width: 250,
+              decoration: BoxDecoration(
+                color: Colors.amber.shade100,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.amber, width: 2),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start, // ← cambia entre start, center y end
+                children: [
+                  // Row con avatar e ícono
+                  Row(
+                    children: const [
+                      CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        child: Icon(Icons.person, color: Colors.white),
+                      ),
+                      SizedBox(width: 10),
+                      Icon(Icons.person, color: Colors.black),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  // Textos con información
+                  const Text(
+                    "Nombre: Marcus Fenix",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const Text("Correo: marcus.fenix@gears.com"),
+                  const Text("Teléfono: +52 123 456 7890"),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
